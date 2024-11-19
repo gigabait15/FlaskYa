@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Яндекс.Диск
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card shadow-sm p-4">
+            <h1 class="text-center mb-4">Введите публичную ссылку</h1>
+            <form method="POST" action="">
+                <div class="mb-3">
+                    <label for="publicKey" class="form-label">Публичная ссылка</label>
+                    <input type="text" class="form-control" id="publicKey" name="public_key"
+                           placeholder="Введите ссылку" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Отправить</button>
+            </form>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="alert alert-info mt-3" role="alert">
+                        <ul class="mb-0">
+                            {% for category, message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock %}
+
+
