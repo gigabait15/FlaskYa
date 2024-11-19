@@ -1,9 +1,9 @@
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from .app import db, login
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+from src.config import db
 
 
 class User(UserMixin, db.Model):
@@ -32,11 +32,3 @@ class User(UserMixin, db.Model):
         :return:booltype
         """
         return check_password_hash(self.password_hash, password)
-
-    @login.user_loader
-    def load_user(id):
-        """
-        загрузчик пользователя, чтобы приложение помнило пользователя
-        :return: данные пользовпателя по id
-        """
-        return db.session.get(User, int(id))
